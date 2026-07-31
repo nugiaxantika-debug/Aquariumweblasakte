@@ -955,8 +955,22 @@ private loadKaryawanData() {
 
     const quotedId = msg.message?.extendedTextMessage?.contextInfo?.stanzaId;
     if (quotedId && this.activeGames.has(quotedId)) {
+        const senderJidRaw = msg.key.participant || msg.participant || jid;
+        const gameSenderJid = typeof senderJidRaw === 'string' ? this.normalizeJid(senderJidRaw) : senderJidRaw;
+        
+        if (!this.registeredUsers.has(gameSenderJid)) {
+            const registerText = `Silakan daftar terlebih dahulu untuk menggunakan bot ini.\n\nKetik: *.daftar [nama].[umur]*\nContoh: .daftar Budi.18\n\nLink: ${this.menuLink || "jadibotbatakvip.biz.id"}`;
+            const contextInfo = { forwardingScore: 999, isForwarded: true };
+            if (this.coverImageBuffer) {
+                await this.sock.sendMessage(jid, { image: this.coverImageBuffer, caption: registerText, contextInfo }, { quoted: msg });
+            } else {
+                await this.sock.sendMessage(jid, { text: registerText, contextInfo }, { quoted: msg });
+            }
+            return;
+        }
+
         const game = this.activeGames.get(quotedId);
-        const userAnswer = body;
+        const userAnswer = body.toLowerCase();
         
         if (game!.type === "tebakangka") {
             const correctAnswer = String(game!.answer).toLowerCase();
@@ -1066,6 +1080,7 @@ private loadKaryawanData() {
     const bokepCommands = ['.bokepmenu', 'bokepmenu', '.vidbokepindonesia', 'vidbokepindonesia', '.vidbokepmalaysia', 'vidbokepmalaysia', '.vidbokepjepang', 'vidbokepjepang', '.vidbokepchina', 'vidbokepchina', '.vidbokepamerika', 'vidbokepamerika'];
     const aiCommands = ['.aimenu', 'aimenu', '.midjourney', 'midjourney', '.grok', 'grok', '.imgai', 'imgai', '.bingimg', 'bingimg', '.nanobananaai', 'nanobananaai', '.hapusbgfoto', 'hapusbgfoto'];
     const cdramaCommands = ['.cdramamenu', 'cdramamenu', '.dramaromantis', 'dramaromantis', '.dramakomedi', 'dramakomedi', '.dramamisteri', 'dramamisteri', '.dramakerajaan', 'dramakerajaan', '.dramakeluarga', 'dramakeluarga', '.dramaperang', 'dramaperang', '.dramaxianxia', 'dramaxianxia', '.dramakriminal', 'dramakriminal', '.dramafantasi', 'dramafantasi'];
+    const gameCommands = ['.gamemenu', 'gamemenu', '.tebakgambar', 'tebakgambar', '.susunkata', 'susunkata', '.math', 'math', '.tebakkata', 'tebakkata', '.tebakbendera', 'tebakbendera', '.asahotak', 'asahotak', '.tebaklirik', 'tebaklirik', '.tekateki', 'tekateki', '.tebakangka', 'tebakangka', '.kuis', 'kuis', '.tebakkota', 'tebakkota', '.family100', 'family100', '.tebakusia', 'tebakusia', '.tebakkimia', 'tebakkimia', '.tebakbuah', 'tebakbuah', '.werewolf', 'werewolf', '.tebakuang', 'tebakuang', '.tebaksurah', 'tebaksurah', '.tebakhewan', 'tebakhewan', '.tebakbaju', 'tebakbaju', '.tebakcelana', 'tebakcelana', '.tebakmakanan', 'tebakmakanan', '.tebakjkt48', 'tebakjkt48', '.togel', 'togel', '.stoptogel', 'stoptogel', '.truthordare', 'truthordare', '.ulartangga', 'ulartangga'];
     const premiumCommands = ['.limit', 'limit', '.ai', 'ai']; // Placeholder for premium restricted commands
     
     if (ownerCommands.includes(requestedCmd) && !isOwner) {
@@ -1132,7 +1147,39 @@ private loadKaryawanData() {
     const isSpecificMenu = possibleCommandName.endsWith("menu") || body.toLowerCase().endsWith(" menu");
     const isMenuCmd = this.menuCommands.has(possibleCommandName) || body.toLowerCase() === "all menu";
 
-    if (isMenuCmd || isSpecificMenu) {
+    const requireRegistrationCommands = [
+        ...funCommands,
+        ...margaCommands,
+        ...videoCommands,
+        ...stickerCommands,
+        ...downloadCommands,
+        ...kristenCommands,
+        ...islamCommands,
+        ...cecanCommands,
+        ...primbonCommands,
+        ...animeCommands,
+        ...sertifikatCommands,
+        ...rpgCommands,
+        ...beritaCommands,
+        ...storeCommands,
+        ...hentaiCommands,
+        ...hantuCommands,
+        ...coganCommands,
+        ...toolsCommands,
+        ...deviceCommands,
+        ...posterCommands,
+        ...sulapCommands,
+        ...tiketCommands,
+        ...karyawanCommands,
+        ...hewanCommands,
+        ...bokepCommands,
+        ...aiCommands,
+        ...cdramaCommands,
+        ...gameCommands
+    ];
+    const isProtectedFeature = requireRegistrationCommands.includes(requestedCmd.toLowerCase()) || requireRegistrationCommands.includes("." + possibleCommandName);
+
+    if (isMenuCmd || isSpecificMenu || isProtectedFeature) {
       if (!this.registeredUsers.has(senderJid)) {
           const registerText = `Silakan daftar terlebih dahulu untuk menggunakan bot ini.\n\nKetik: *.daftar [nama].[umur]*\nContoh: .daftar Budi.18\n\nLink: ${this.menuLink || "jadibotbatakvip.biz.id"}`;
           const contextInfo = {
