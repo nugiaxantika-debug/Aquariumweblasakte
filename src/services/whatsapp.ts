@@ -216,7 +216,7 @@ private loadKaryawanData() {
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
               newsletterJid: this.channelJid,
-              newsletterName: this.channelName || this.textNama || this.customBotName || 'JADIBOT BATAK VIP',
+              newsletterName: this.textNama || this.channelName || this.customBotName || 'JADIBOT BATAK VIP',
               serverMessageId: -1
           }
       };
@@ -960,7 +960,7 @@ private loadKaryawanData() {
         
         if (!this.registeredUsers.has(gameSenderJid)) {
             const registerText = `Silakan daftar terlebih dahulu untuk menggunakan bot ini.\n\nKetik: *.daftar [nama].[umur]*\nContoh: .daftar Budi.18\n\nLink: ${this.menuLink || "jadibotbatakvip.biz.id"}`;
-            const contextInfo = { forwardingScore: 999, isForwarded: true };
+            const contextInfo = this.getMenuContextInfo();
             if (this.coverImageBuffer) {
                 await this.sock.sendMessage(jid, { image: this.coverImageBuffer, caption: registerText, contextInfo }, { quoted: msg });
             } else {
@@ -1182,10 +1182,7 @@ private loadKaryawanData() {
     if (isMenuCmd || isSpecificMenu || isProtectedFeature) {
       if (!this.registeredUsers.has(senderJid)) {
           const registerText = `Silakan daftar terlebih dahulu untuk menggunakan bot ini.\n\nKetik: *.daftar [nama].[umur]*\nContoh: .daftar Budi.18\n\nLink: ${this.menuLink || "jadibotbatakvip.biz.id"}`;
-          const contextInfo = {
-              forwardingScore: 999,
-              isForwarded: true
-          };
+          const contextInfo = this.getMenuContextInfo();
           if (this.coverImageBuffer) {
               await this.sock.sendMessage(jid, { image: this.coverImageBuffer, caption: registerText, contextInfo }, { quoted: msg });
           } else {
