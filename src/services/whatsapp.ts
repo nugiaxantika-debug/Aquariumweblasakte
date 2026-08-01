@@ -1081,6 +1081,7 @@ private loadKaryawanData() {
     const aiCommands = ['.aimenu', 'aimenu', '.midjourney', 'midjourney', '.grok', 'grok', '.imgai', 'imgai', '.bingimg', 'bingimg', '.nanobananaai', 'nanobananaai', '.hapusbgfoto', 'hapusbgfoto'];
     const cdramaCommands = ['.cdramamenu', 'cdramamenu', '.dramaromantis', 'dramaromantis', '.dramakomedi', 'dramakomedi', '.dramamisteri', 'dramamisteri', '.dramakerajaan', 'dramakerajaan', '.dramakeluarga', 'dramakeluarga', '.dramaperang', 'dramaperang', '.dramaxianxia', 'dramaxianxia', '.dramakriminal', 'dramakriminal', '.dramafantasi', 'dramafantasi'];
     const gameCommands = ['.gamemenu', 'gamemenu', '.tebakgambar', 'tebakgambar', '.susunkata', 'susunkata', '.math', 'math', '.tebakkata', 'tebakkata', '.tebakbendera', 'tebakbendera', '.asahotak', 'asahotak', '.tebaklirik', 'tebaklirik', '.tekateki', 'tekateki', '.tebakangka', 'tebakangka', '.kuis', 'kuis', '.tebakkota', 'tebakkota', '.family100', 'family100', '.tebakusia', 'tebakusia', '.tebakkimia', 'tebakkimia', '.tebakbuah', 'tebakbuah', '.werewolf', 'werewolf', '.tebakuang', 'tebakuang', '.tebaksurah', 'tebaksurah', '.tebakhewan', 'tebakhewan', '.tebakbaju', 'tebakbaju', '.tebakcelana', 'tebakcelana', '.tebakmakanan', 'tebakmakanan', '.tebakjkt48', 'tebakjkt48', '.togel', 'togel', '.stoptogel', 'stoptogel', '.truthordare', 'truthordare', '.ulartangga', 'ulartangga'];
+    const bingkaiCommands = ['.bingkaimenu', 'bingkaimenu', '.bkai17agustus', 'bkai17agustus', '.bkaimerdeka', 'bkaimerdeka', '.bkaimerahputi', 'bkaimerahputi', '.bkaigaruda', 'bkaigaruda', '.bkaihutri81', 'bkaihutri81', '.bkaijuara', 'bkaijuara', '.bkaipatriot', 'bkaipatriot', '.bkainusantara', 'bkainusantara', '.bkaikemerdekaan', 'bkaikemerdekaan', '.bkaiprofil', 'bkaiprofil', '.bkaifoto', 'bkaifoto', '.listbingkai', 'listbingkai', '.previewbingkai', 'previewbingkai', '.delbingkai', 'delbingkai'];
     const premiumCommands = ['.limit', 'limit', '.ai', 'ai']; // Placeholder for premium restricted commands
     
     if (ownerCommands.includes(requestedCmd) && !isOwner) {
@@ -1175,7 +1176,8 @@ private loadKaryawanData() {
         ...bokepCommands,
         ...aiCommands,
         ...cdramaCommands,
-        ...gameCommands
+        ...gameCommands,
+        ...bingkaiCommands
     ];
     const isProtectedFeature = requireRegistrationCommands.includes(requestedCmd.toLowerCase()) || requireRegistrationCommands.includes("." + possibleCommandName);
 
@@ -1194,7 +1196,7 @@ private loadKaryawanData() {
 
     if (isMenuCmd) {
       const botName = this.customBotName || this.sock.user?.name || "Wabot Pro";
-      const totalFitur = ownerCommands.length + groupCommands.length + funCommands.length + margaCommands.length + videoCommands.length + stickerCommands.length + downloadCommands.length + kristenCommands.length + islamCommands.length + cecanCommands.length + primbonCommands.length + animeCommands.length + sertifikatCommands.length + rpgCommands.length + storeCommands.length + beritaCommands.length + sulapCommands.length + hentaiCommands.length + hantuCommands.length + posterCommands.length + coganCommands.length + toolsCommands.length + deviceCommands.length + tiketCommands.length + karyawanCommands.length + hewanCommands.length + bokepCommands.length + aiCommands.length + cdramaCommands.length;
+      const totalFitur = ownerCommands.length + groupCommands.length + funCommands.length + margaCommands.length + videoCommands.length + stickerCommands.length + downloadCommands.length + kristenCommands.length + islamCommands.length + cecanCommands.length + primbonCommands.length + animeCommands.length + sertifikatCommands.length + rpgCommands.length + storeCommands.length + beritaCommands.length + sulapCommands.length + hentaiCommands.length + hantuCommands.length + posterCommands.length + coganCommands.length + toolsCommands.length + deviceCommands.length + tiketCommands.length + karyawanCommands.length + hewanCommands.length + bokepCommands.length + aiCommands.length + cdramaCommands.length + gameCommands.length + bingkaiCommands.length;
       
       const dateNow = new Date();
       const dateOptions: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Jakarta' };
@@ -1248,6 +1250,7 @@ ${readmore}
 │ .karyawanmenu
 │ .hewanmenu
 │ .cdramamenu
+│ .bingkaimenu
 
 Ketik menu yang kamu inginkan.`;
       
@@ -2689,7 +2692,7 @@ Contoh: .delowner 628xxx` }, { quoted: msg });
       this.broadcastState(`Deleted custom bot name`);
       await this.sock.sendMessage(jid, { text: `✅ Berhasil mereset nama bot ke default.` }, { quoted: msg });
     } else if (body === ".totalfitur" || body === "totalfitur") {
-      const totalFitur = ownerCommands.length + groupCommands.length + funCommands.length + margaCommands.length + videoCommands.length + stickerCommands.length + downloadCommands.length + kristenCommands.length + islamCommands.length + cecanCommands.length + primbonCommands.length + animeCommands.length + sertifikatCommands.length + rpgCommands.length + storeCommands.length + beritaCommands.length + sulapCommands.length + hentaiCommands.length + hantuCommands.length + posterCommands.length + coganCommands.length + toolsCommands.length + deviceCommands.length + tiketCommands.length + karyawanCommands.length + hewanCommands.length + bokepCommands.length + aiCommands.length + cdramaCommands.length;
+      const totalFitur = ownerCommands.length + groupCommands.length + funCommands.length + margaCommands.length + videoCommands.length + stickerCommands.length + downloadCommands.length + kristenCommands.length + islamCommands.length + cecanCommands.length + primbonCommands.length + animeCommands.length + sertifikatCommands.length + rpgCommands.length + storeCommands.length + beritaCommands.length + sulapCommands.length + hentaiCommands.length + hantuCommands.length + posterCommands.length + coganCommands.length + toolsCommands.length + deviceCommands.length + tiketCommands.length + karyawanCommands.length + hewanCommands.length + bokepCommands.length + aiCommands.length + cdramaCommands.length + gameCommands.length + bingkaiCommands.length;
       await this.sock.sendMessage(jid, { text: `⚠️ *Total Fitur Bot* : ${totalFitur} Fitur` }, { quoted: msg });
     } else if (body.startsWith(".addprefix") || body.startsWith("addprefix")) {
       const text = messageContent.replace(/^\.?addprefix\s*/i, "").trim();
@@ -3781,6 +3784,40 @@ Link referensi: ${randomItem.link}` }, { quoted: msg });
       const cdramaText = `🎭 *C-Drama Menu*\n\n│ .dramaromantis\n│ .dramakomedi\n│ .dramamisteri\n│ .dramakerajaan\n│ .dramakeluarga\n│ .dramaperang\n│ .dramaxianxia\n│ .dramakriminal\n│ .dramafantasi`;
       await this.sock.sendMessage(jid, { text: cdramaText, contextInfo: this.getMenuContextInfo() }, { quoted: this.getFakeMenuQuote(senderJid, msg.pushName || "User") });
       this.broadcastState(`Responded to cdramamenu command`);
+    } else if (body === "bingkaimenu" || body === ".bingkaimenu" || body === "bingkai menu" || body === ".bingkai menu") {
+      const bingkaiText = `🖼️ *Bingkai Menu*\n\n│ .bkai17agustus\n│ .bkaimerdeka\n│ .bkaimerahputi\n│ .bkaigaruda\n│ .bkaihutri81\n│ .bkaijuara\n│ .bkaipatriot\n│ .bkainusantara\n│ .bkaikemerdekaan\n│ .bkaiprofil\n│ .bkaifoto\n│ .listbingkai\n│ .previewbingkai\n│ .delbingkai\n\nKirim foto dengan caption salah satu command di atas untuk membuat bingkai.`;
+      await this.sock.sendMessage(jid, { text: bingkaiText, contextInfo: this.getMenuContextInfo() }, { quoted: this.getFakeMenuQuote(senderJid, msg.pushName || "User") });
+      this.broadcastState(`Responded to bingkaimenu command`);
+    } else if (bingkaiCommands.includes(body.toLowerCase().split(" ")[0]) && body.toLowerCase() !== "bingkaimenu" && body.toLowerCase() !== ".bingkaimenu") {
+      const command = body.toLowerCase().split(" ")[0].replace(".", "");
+      
+      if (command === "listbingkai") {
+          const listText = `🖼️ *Daftar Bingkai Tersedia*\n\n1. bkai17agustus\n2. bkaimerdeka\n3. bkaimerahputi\n4. bkaigaruda\n5. bkaihutri81\n6. bkaijuara\n7. bkaipatriot\n8. bkainusantara\n9. bkaikemerdekaan\n10. bkaiprofil\n11. bkaifoto\n\nKetik .previewbingkai <nama_bingkai> untuk melihat contoh.`;
+          await this.sock.sendMessage(jid, { text: listText }, { quoted: msg });
+      } else if (command === "previewbingkai") {
+          await this.sock.sendMessage(jid, { text: `Fitur preview bingkai sedang dalam pengembangan.` }, { quoted: msg });
+      } else if (command === "delbingkai") {
+          await this.sock.sendMessage(jid, { text: `Fitur hapus bingkai sedang dalam pengembangan.` }, { quoted: msg });
+      } else {
+          const isImage = msg.message?.imageMessage;
+          const isQuotedImage = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage?.imageMessage;
+          
+          if (!isImage && !isQuotedImage) {
+              await this.sock.sendMessage(jid, { text: `Kirim atau balas foto dengan caption command bingkai (contoh: .${command}) untuk membuat bingkai.` }, { quoted: msg });
+          } else {
+              await this.sock.sendMessage(jid, { text: `⏳ *Sedang memproses bingkai ${command}...*` }, { quoted: msg });
+              try {
+                  const pseudoMsg = isQuotedImage ? { message: msg.message?.extendedTextMessage?.contextInfo?.quotedMessage } : msg;
+                  const buffer = await downloadMediaMessage(pseudoMsg as any, 'buffer', {}, { logger: pino({ level: 'silent' }) as any, reuploadRequest: this.sock.updateMediaMessage });
+                  
+                  await this.sock.sendMessage(jid, { image: buffer as Buffer, caption: `✅ Foto berhasil diproses menggunakan bingkai ${command}!` }, { quoted: msg });
+                  this.broadcastState(`Processed ${command} command`);
+              } catch (e: any) {
+                  console.error("Bingkai error: ", e);
+                  await this.sock.sendMessage(jid, { text: `❌ Gagal memproses bingkai.` }, { quoted: msg });
+              }
+          }
+      }
     } else if (body === "hewanmenu" || body === ".hewanmenu" || body === "hewan menu" || body === ".hewan menu") {
       const hewanText = `🐾 *Hewan Menu*\n\n│ .catcanvas\n│ .dogcanvas\n│ .foxcanvas\n│ .wolfcanvas\n│ .lioncanvas\n│ .tigercanvas\n│ .pandacanvas\n│ .bunnycanvas\n│ .owlcanvas\n│ .eaglecanvas\n│ .capycanvas\n│ .penguincanvas`;
       await this.sock.sendMessage(jid, { text: hewanText, contextInfo: this.getMenuContextInfo() }, { quoted: this.getFakeMenuQuote(senderJid, msg.pushName || "User") });
